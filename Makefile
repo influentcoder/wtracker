@@ -1,7 +1,7 @@
 .PHONY: build run tidy vet clean
 
 build:
-	go build -o bin/server ./cmd/server
+	go build -o bin/server .
 
 run: build
 	PORT=8080 ./bin/server
