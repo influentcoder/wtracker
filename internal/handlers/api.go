@@ -169,9 +169,10 @@ func (a *API) getBTCPrice(ctx context.Context) float64 {
 	return price
 }
 
-// fetchBTCPrice fetches the current BTC/USD price from CoinGecko's free API.
+// fetchBTCPrice fetches the current BTC/USD spot price from the Coinbase public API.
+// No authentication or API key required.
 func fetchBTCPrice(ctx context.Context) (float64, error) {
-	url := "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+	url := "https://api.coinbase.com/v2/prices/BTC-USD/spot"
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return 0, err
@@ -186,18 +187,23 @@ func fetchBTCPrice(ctx context.Context) (float64, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return 0, fmt.Errorf("coingecko status %d", resp.StatusCode)
+		return 0, fmt.Errorf("coinbase price API status %d", resp.StatusCode)
 	}
 
 	var data struct {
-		Bitcoin struct {
-			USD float64 `json:"usd"`
-		} `json:"bitcoin"`
+		Data struct {
+			Amount string `json:"amount"`
+		} `json:"data"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		return 0, err
 	}
-	return data.Bitcoin.USD, nil
+
+	var price float64
+	if _, err := fmt.Sscanf(data.Data.Amount, "%f", &price); err != nil {
+		return 0, fmt.Errorf("parsing price %q: %w", data.Data.Amount, err)
+	}
+	return price, nil
 }
 
 func writeJSON(w http.ResponseWriter, v any) {

@@ -50,13 +50,13 @@ var defaultWhales = []WhaleDef{
 		Chain:   "bitcoin",
 	},
 	{
-		Address: "3LYJfcfHcvFMJKHKENnmqeLQnJHNGkPpLx",
-		Label:   "Kraken Exchange",
+		Address: "1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ",
+		Label:   "Coincheck Exchange",
 		Chain:   "bitcoin",
 	},
 	{
-		Address: "385cR5DM96n1HvBDMnLjTpFs4iXyofo3Zy",
-		Label:   "Huobi Exchange",
+		Address: "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r",
+		Label:   "Bitfinex Cold Storage",
 		Chain:   "bitcoin",
 	},
 	{
