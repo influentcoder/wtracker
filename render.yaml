@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: wtracker
+    runtime: go
+    plan: free
+    buildCommand: go build -o bin/server ./cmd/server
+    startCommand: ./bin/server
+    envVars:
+      - key: PORT
+        generateValue: false

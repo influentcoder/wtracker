@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whale Tracker — Bitcoin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐋</text></svg>" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🐋</div>
+      Whale Tracker
+    </div>
+    <div class="header-right">
+      <span id="btc-price" class="btc-price">BTC —</span>
+      <span id="last-updated" class="last-updated">Loading…</span>
+      <button id="refresh-btn" class="refresh-btn" title="Refresh now">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+        </svg>
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main>
+    <h1 class="page-title">Bitcoin Whale Addresses</h1>
+    <p class="page-subtitle">
+      Tracking major Bitcoin holders in real-time via Blockstream.info.
+      Click any card to view recent transactions.
+    </p>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">Tracked Whales</div>
+        <div id="stat-whales" class="stat-value">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total BTC Held</div>
+        <div id="stat-btc" class="stat-value accent">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Est. USD Value</div>
+        <div id="stat-usd" class="stat-value">—</div>
+      </div>
+    </div>
+
+    <!-- Whale Cards Grid -->
+    <div id="whale-grid" class="whale-grid"></div>
+  </main>
+
+  <!-- ── Detail Modal ── -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div id="modal-title" class="modal-title">—</div>
+          <div id="modal-address" class="modal-subtitle">—</div>
+        </div>
+        <button id="modal-close" class="modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <div class="stat-label">BTC Balance</div>
+          <div id="modal-btc" class="stat-value accent">—</div>
+        </div>
+        <div class="modal-stat">
+          <div class="stat-label">USD Value</div>
+          <div id="modal-usd" class="stat-value">—</div>
+        </div>
+        <div class="modal-stat">
+          <div class="stat-label">Total Transactions</div>
+          <div id="modal-txcount" class="stat-value">—</div>
+        </div>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
